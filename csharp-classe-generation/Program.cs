@@ -85,6 +85,32 @@ double CalcolaEtaMediaClasse(int[] eta, int numeroDiPartecipanti)
     return media;
 }
 
+int EtaPiuGiovane(int[] eta)
+{
+    int piuGiovane = eta[0];
+    for(int i = 0; i < eta.Length; i++)
+    {
+        if (eta[i] < piuGiovane)
+        {
+            piuGiovane = eta[i];
+        }
+    }
+    return piuGiovane;
+}
+
+int EtaPiuVecchio(int[] eta)
+{
+    int piuVecchio = eta[0];
+    for (int i = 0; i < eta.Length; i++)
+    {
+        if (eta[i] > piuVecchio)
+        {
+            piuVecchio = eta[i];
+        }
+    }
+    return piuVecchio;
+}
+
 /*---------------------PROGRAMMA------------------------*/
 Console.WriteLine("Benvenuto! \n ");
 Console.WriteLine("Questa è la tua classe: ");
@@ -116,8 +142,5 @@ while (true)
             break;
     }
 }
-
-
-
 
 
