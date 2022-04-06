@@ -2,7 +2,7 @@
 int numeroPartecipantiMassimi = 10;
 int numeroPartecipantiAttuali = 0;
 string[] nomi = new string[numeroPartecipantiMassimi];
-string[] cognomi = new string[numeroPartecipantiMassimi]; 
+string[] cognomi = new string[numeroPartecipantiMassimi];
 int[] eta = new int[numeroPartecipantiMassimi];
 
 /*--------------------FUNZIONI--------------------*/
@@ -74,6 +74,17 @@ void RimuoviUltimoAlunno()
     }
 }
 
+double CalcolaEtaMediaClasse(int[] eta, int numeroDiPartecipanti)
+{
+    int somma = 0;
+    for(int i = 0; i < eta.Length; i++)
+    {
+        somma += eta[i];
+    }
+    double media = (double)somma / numeroDiPartecipanti;
+    return media;
+}
+
 /*---------------------PROGRAMMA------------------------*/
 Console.WriteLine("Benvenuto! \n ");
 Console.WriteLine("Questa è la tua classe: ");
@@ -82,18 +93,18 @@ StampaArrayDiStringhe(cognomi);
 StampaEtaAlunni(eta);
 while (true)
 {
-    Console.WriteLine("Vuoi aggiungere o rimuovere un alunno [aggiungi/rimuovi]?");
+    Console.WriteLine("Vuoi aggiungere o rimuovere un alunno [aggiungere/rimuovere]?");
     string scelta = Console.ReadLine();
     switch (scelta)
     {
-        case "aggiungi":
+        case "aggiungere":
             AggiungiAlunno();
             Console.WriteLine("Un nuovo alunno è stato aggiunto! Questa è la tua nuova classe:");
             StampaArrayDiStringhe(nomi);
             StampaArrayDiStringhe(cognomi);
             StampaEtaAlunni(eta);
             break;
-        case "rimuovi":
+        case "rimuovere":
             RimuoviUltimoAlunno();
             Console.WriteLine("L' ultimo alunno è stato rimosso! Questa è la tua nuova classe:");
             StampaArrayDiStringhe(nomi);
@@ -101,10 +112,12 @@ while (true)
             StampaEtaAlunni(eta);
             break;
         default:
-            Console.WriteLine("Scelta non valida, scrivi aggiungi o rimuovi");
+            Console.WriteLine("Scelta non valida, scrivi aggiungere o rimuovere");
             break;
     }
 }
+
+
 
 
 
