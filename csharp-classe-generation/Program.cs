@@ -21,7 +21,7 @@ void StampaEtaAlunni(int[] arrayDiInteri)
     Console.Write("[");
     for (int i = 0; i < arrayDiInteri.Length - 1; i++)
     {
-        Console.Write(arrayDiInteri[i] + ", ");
+        Console.Write(arrayDiInteri[i] + ",\t ");
     }
     Console.WriteLine(arrayDiInteri[arrayDiInteri.Length - 1] + "]");
 }
@@ -59,19 +59,52 @@ void AggiungiAlunno()
     }
 }
 
-StampaArrayDiStringhe(nomi);
-StampaArrayDiStringhe (cognomi);
-StampaEtaAlunni(eta);
+void RimuoviUltimoAlunno()
+{
+    if (numeroPartecipantiAttuali == 0)
+    {
+        Console.WriteLine("Non è presente nessun alunno nella classe");
+    }
+    else
+    {
+        nomi[numeroPartecipantiAttuali -1] = " ";
+        cognomi[numeroPartecipantiAttuali -1] = " ";
+        eta[numeroPartecipantiAttuali -1] = 0;
+        numeroPartecipantiAttuali--;
+    }
+}
 
-AggiungiAlunno();
-
+/*---------------------PROGRAMMA------------------------*/
+Console.WriteLine("Benvenuto! \n ");
+Console.WriteLine("Questa è la tua classe: ");
 StampaArrayDiStringhe(nomi);
 StampaArrayDiStringhe(cognomi);
 StampaEtaAlunni(eta);
+while (true)
+{
+    Console.WriteLine("Vuoi aggiungere o rimuovere un alunno [aggiungi/rimuovi]?");
+    string scelta = Console.ReadLine();
+    switch (scelta)
+    {
+        case "aggiungi":
+            AggiungiAlunno();
+            Console.WriteLine("Un nuovo alunno è stato aggiunto! Questa è la tua nuova classe:");
+            StampaArrayDiStringhe(nomi);
+            StampaArrayDiStringhe(cognomi);
+            StampaEtaAlunni(eta);
+            break;
+        case "rimuovi":
+            RimuoviUltimoAlunno();
+            Console.WriteLine("L' ultimo alunno è stato rimosso! Questa è la tua nuova classe:");
+            StampaArrayDiStringhe(nomi);
+            StampaArrayDiStringhe(cognomi);
+            StampaEtaAlunni(eta);
+            break;
+        default:
+            Console.WriteLine("Scelta non valida, scrivi aggiungi o rimuovi");
+            break;
+    }
+}
 
-AggiungiAlunno();
 
-StampaArrayDiStringhe(nomi);
-StampaArrayDiStringhe(cognomi);
-StampaEtaAlunni(eta);
 
