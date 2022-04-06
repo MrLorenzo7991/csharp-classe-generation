@@ -23,14 +23,14 @@ void StampaEtaAlunni(int[] arrayDiInteri)
     {
         Console.Write(arrayDiInteri[i] + ",\t ");
     }
-    Console.WriteLine(arrayDiInteri[arrayDiInteri.Length - 1] + "]");
+    Console.WriteLine(arrayDiInteri[arrayDiInteri.Length - 1] + "] \n");
 }
 
 void AggiungiAlunno()
 {
-    if (numeroPartecipantiAttuali == numeroPartecipantiMassimi)  //è giusto inserire variabili che non sono presenti in input?
+    if (numeroPartecipantiAttuali == numeroPartecipantiMassimi) 
     {
-        Console.WriteLine("Hai Raggiunto il numero massimo di partecipanti, non puoi aggiungere nuovi alunni.");
+        Console.WriteLine("Hai Raggiunto il numero massimo di partecipanti, non puoi aggiungere nuovi alunni.\n");
     }
     else
     {
@@ -50,7 +50,7 @@ void AggiungiAlunno()
             }
             else
             {
-                Console.WriteLine("Il formato dell'età inserito non è corretto, perfavore riprova.");
+                Console.WriteLine("Il formato dell'età inserito non è corretto, perfavore riprova.\n");
             }
 
         }while (!flag);
@@ -63,7 +63,7 @@ void RimuoviUltimoAlunno()
 {
     if (numeroPartecipantiAttuali == 0)
     {
-        Console.WriteLine("Non è presente nessun alunno nella classe");
+        Console.WriteLine("Non è presente nessun alunno nella classe \n");
     }
     else
     {
@@ -71,6 +71,10 @@ void RimuoviUltimoAlunno()
         cognomi[numeroPartecipantiAttuali -1] = " ";
         eta[numeroPartecipantiAttuali -1] = 0;
         numeroPartecipantiAttuali--;
+        Console.WriteLine("L'ultimo alunno è stato eliminato! Questa è la tua nuova classe:");
+        StampaArrayDiStringhe(nomi);
+        StampaArrayDiStringhe(cognomi);
+        StampaEtaAlunni(eta);
     }
 }
 
@@ -111,36 +115,116 @@ int EtaPiuVecchio(int[] eta)
     return piuVecchio;
 }
 
+void StudentePiuGiovane()
+{
+    int etaPiuGiovane = eta[0];
+    int indiceStudentePiuGiovane = 0;
+    for (int i = 0; i < eta.Length; i++)
+    {
+        if (eta[i] < etaPiuGiovane && eta[i] != 0)
+        {
+            etaPiuGiovane = eta[i];
+            indiceStudentePiuGiovane = i;
+        }
+    }
+    Console.WriteLine("Lo studente più giovane è:");
+    Console.WriteLine(nomi[indiceStudentePiuGiovane] + "\t" + cognomi[indiceStudentePiuGiovane] + "\t" + etaPiuGiovane + " anni \n");
+}
+
+void StudentePiuVecchio()
+{
+    int etaPiuVecchio = eta[0];
+    int indiceStudentePiuVecchio = 0;
+    for (int i = 0; i < eta.Length; i++)
+    {
+        if (eta[i] > etaPiuVecchio)
+        {
+            etaPiuVecchio = eta[i];
+            indiceStudentePiuVecchio = i;
+        }
+    }
+    Console.WriteLine("Lo studente più giovane è:");
+    Console.WriteLine(nomi[indiceStudentePiuVecchio] + "\t" + cognomi[indiceStudentePiuVecchio] + "\t" + etaPiuVecchio + " anni \n");
+}
 /*---------------------PROGRAMMA------------------------*/
 Console.WriteLine("Benvenuto! \n ");
 Console.WriteLine("Questa è la tua classe: ");
 StampaArrayDiStringhe(nomi);
 StampaArrayDiStringhe(cognomi);
 StampaEtaAlunni(eta);
+Console.WriteLine();
+
 while (true)
 {
-    Console.WriteLine("Vuoi aggiungere o rimuovere un alunno [aggiungere/rimuovere]?");
-    string scelta = Console.ReadLine();
-    switch (scelta)
+    Console.WriteLine("Cosa vuoi fare? (scrivi il numero dell'operazione scelta)");
+    Console.WriteLine("1) Aggiungere o rimuovere un alunno");
+    Console.WriteLine("2) Stampare la classe");
+    Console.WriteLine("3) Calcolare l'età media della classe");
+    Console.WriteLine("4) Conoscere lo studente più giovane");
+    Console.WriteLine("5) Conoscere lo studente più vecchio \n");
+    
+    bool flag = false;
+    int sceltaOperazione = 0;
+    do
     {
-        case "aggiungere":
-            AggiungiAlunno();
-            Console.WriteLine("Un nuovo alunno è stato aggiunto! Questa è la tua nuova classe:");
+
+        int sceltaOperzione = 0;
+        if (int.TryParse(Console.ReadLine(), out int scelta))
+        {
+            sceltaOperazione = scelta;
+            flag = true;
+        }
+        else
+        {
+            Console.WriteLine("Scegli un numero da 1 a 5 perfavore \n");
+        }
+    } while (flag == false); 
+    
+    switch (sceltaOperazione)
+    {
+        case 1:
+            Console.WriteLine("Vuoi aggiungere o rimuovere un alunno [aggiungere/rimuovere]?");
+            string scelta = Console.ReadLine();
+            switch (scelta)
+            {
+                case "aggiungere":
+                    AggiungiAlunno();
+                    Console.WriteLine("Un nuovo alunno è stato aggiunto! Questa è la tua nuova classe:");
+                    StampaArrayDiStringhe(nomi);
+                    StampaArrayDiStringhe(cognomi);
+                    StampaEtaAlunni(eta);
+                    break;
+                case "rimuovere":
+                    RimuoviUltimoAlunno();
+                    break;
+                default:
+                    Console.WriteLine("Scelta non valida, riprova \n");
+                    break;
+            }
+            break;
+        case 2:
             StampaArrayDiStringhe(nomi);
             StampaArrayDiStringhe(cognomi);
             StampaEtaAlunni(eta);
             break;
-        case "rimuovere":
-            RimuoviUltimoAlunno();
-            Console.WriteLine("L' ultimo alunno è stato rimosso! Questa è la tua nuova classe:");
-            StampaArrayDiStringhe(nomi);
-            StampaArrayDiStringhe(cognomi);
-            StampaEtaAlunni(eta);
+        case 3:
+            Console.WriteLine("L' età media della classe è di: " + CalcolaEtaMediaClasse(eta, numeroPartecipantiAttuali) + " anni \n");
+            break ;
+        case 4:
+            StudentePiuGiovane();
             break;
-        default:
-            Console.WriteLine("Scelta non valida, scrivi aggiungere o rimuovere");
+        case 5:
+            StudentePiuVecchio();
+            break;
+        default :
+            Console.WriteLine("Scegli un numero da 1 a 5 perfavore \n");
             break;
     }
 }
+
+
+
+
+
 
 
