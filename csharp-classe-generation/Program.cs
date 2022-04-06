@@ -14,3 +14,13 @@ void StampaArrayDiStringhe(string[] arrayDiStringhe)
     }
     Console.WriteLine(arrayDiStringhe[arrayDiStringhe.Length - 1] + "]");
 }
+
+void StampaEtaAlunni(int[] arrayDiInteri)
+{
+    Console.Write("[");
+    for (int i = 0; i < arrayDiInteri.Length - 1; i++)
+    {
+        Console.Write(arrayDiInteri[i] + ", ");
+    }
+    Console.WriteLine(arrayDiInteri[arrayDiInteri.Length - 1] + "]");
+}
