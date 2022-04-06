@@ -54,7 +54,10 @@ void AggiungiAlunno()
             }
 
         }while (!flag);
-
+        Console.WriteLine("Un nuovo alunno è stato aggiunto! Questa è la tua nuova classe:");
+        StampaArrayDiStringhe(nomi);
+        StampaArrayDiStringhe(cognomi);
+        StampaEtaAlunni(eta);
 
     }
 }
@@ -143,7 +146,7 @@ void StudentePiuVecchio()
             indiceStudentePiuVecchio = i;
         }
     }
-    Console.WriteLine("Lo studente più giovane è:");
+    Console.WriteLine("Lo studente più vecchio è:");
     Console.WriteLine(nomi[indiceStudentePiuVecchio] + "\t" + cognomi[indiceStudentePiuVecchio] + "\t" + etaPiuVecchio + " anni \n");
 }
 /*---------------------PROGRAMMA------------------------*/
@@ -189,10 +192,6 @@ while (true)
             {
                 case "aggiungere":
                     AggiungiAlunno();
-                    Console.WriteLine("Un nuovo alunno è stato aggiunto! Questa è la tua nuova classe:");
-                    StampaArrayDiStringhe(nomi);
-                    StampaArrayDiStringhe(cognomi);
-                    StampaEtaAlunni(eta);
                     break;
                 case "rimuovere":
                     RimuoviUltimoAlunno();
